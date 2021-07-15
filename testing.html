@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>MY TODOS!</title>
+</head>
+
+<body style="background-color:powderblue;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">                       <!-- creating the nav bar-->
+        <div class="container-fluid">                                                  <!-- if we dont use fluid it takes the entire row-->
+            <a class="navbar-brand" href="">MY TODOS</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Log Out </a>
+                    </li>
+                
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">                                        <!-- creating new container -->
+      <h2 style="text-align:left">Add a Todo</h2>
+      <form action="/testing" method="POST">                                   <!-- selecting POST method action to the form-->
+
+            <div class="row mb-3">
+              <label for="title" class="col-sm-2 col-form-label">Todo Title</label>        <!-- Title of our form-->
+              <div class="col-sm-5">
+                <input type="text" class="form-control" name = "title" id="title">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="desc" class="col-sm-2 col-form-label">Todo Description</label>
+              <div class="col-sm-5">
+                <input type="text" class="form-control" name="desc" id="desc">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          
+        </form>
+    </div>
+    <div class="container">                                                 <!-- creating the container-->
+      <h2>Your TODOS</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">SNo</th>                                       <!-- creating parameter names-->
+            <th scope="col">Title</th>
+            <th scope="col">Description</th>
+            <th scope="col">Time</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for todo in allTodo %}                                         <!-- using jinja 2 extention for displaying the todos-->
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{todo.title}}</td>
+            <td>{{todo.desc}}</td>
+            <td>{{todo.date_created}}</td>
+            <td><a href="/update/{{todo.sno}}" type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button></td>
+            <td><a href="/delete/{{todo.sno}}" type="button" class="btn btn-outline-danger btn-sm mx-1">Delete</button></td>
+          </tr>
+          {% endfor %}
+          
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
